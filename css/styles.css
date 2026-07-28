@@ -1777,9 +1777,9 @@ h3 { font-size: 1.35rem; }
 
 @media (max-width: 800px) {
     .cube-net {
-        grid-template-columns: repeat(2, auto);
-        gap: 10px;
-        --sticker-size: 38px;
+        grid-template-columns: repeat(4, auto);
+        gap: 8px;
+        --sticker-size: 34px;
     }
 }
 
@@ -1799,9 +1799,10 @@ h3 { font-size: 1.35rem; }
     .btn-lg { width: 100%; justify-content: center; }
 
     .cube-net {
-        grid-template-columns: repeat(2, auto);
-        gap: 8px;
-        --sticker-size: 32px;
+        grid-template-columns: repeat(4, auto);
+        gap: 6px;
+        --sticker-size: 25px;
+        --sticker-gap: 2px;
     }
 
     .color-palette {
