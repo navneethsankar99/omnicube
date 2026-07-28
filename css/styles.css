@@ -1005,7 +1005,31 @@ h3 { font-size: 1.35rem; }
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 24px 0;
+    padding: 16px 0;
+}
+
+.solve-display-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.solve-3d-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.solve-2d-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mini-cube-net {

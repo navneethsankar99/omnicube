@@ -199,15 +199,30 @@ const App = (() => {
 
     // === Solve View ===
     function initSolveView() {
-        if (!solutionData) return;
-
         const movesContainer = document.getElementById('solve-moves');
         const cubeDisplay = document.getElementById('solve-cube-display');
         const moveCountEl = document.getElementById('solve-move-count');
         const stepCounterEl = document.getElementById('step-counter');
 
+        if (!solutionData) {
+            if (moveCountEl) moveCountEl.textContent = '—';
+            if (stepCounterEl) stepCounterEl.textContent = '0 / 0';
+            if (movesContainer) movesContainer.innerHTML = '<div style="color: var(--text-muted); padding: 12px; text-align: center;">No moves to display</div>';
+            if (cubeDisplay) {
+                cubeDisplay.innerHTML = `
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; gap: 16px;">
+                        <div style="font-size: 3.5rem;">🧩</div>
+                        <h3 style="font-size: 1.3rem; font-weight: 800;">No Active Solution</h3>
+                        <p style="color: var(--text-secondary); max-width: 440px; font-size: 0.95rem;">Input a cube state or load a scramble to view the step-by-step 3D & 2D solver visualizer.</p>
+                        <button class="btn btn-primary btn-lg" onclick="App.navigate('input')">⚡ Go to 3D Solver</button>
+                    </div>
+                `;
+            }
+            return;
+        }
+
         // Show total move count
-        moveCountEl.textContent = `${solutionData.totalMoves} moves`;
+        if (moveCountEl) moveCountEl.textContent = `${solutionData.totalMoves} moves`;
 
         // Render moves as badges
         renderMovesBadges(movesContainer);
@@ -218,6 +233,7 @@ const App = (() => {
     }
 
     function renderMovesBadges(container) {
+        if (!container) return;
         container.innerHTML = '';
         solutionData.moves.forEach((move, i) => {
             const badge = document.createElement('span');
@@ -247,7 +263,9 @@ const App = (() => {
 
         // Update step counter
         const stepCounterEl = document.getElementById('step-counter');
-        stepCounterEl.textContent = `${currentMoveIndex + 1} / ${solutionData.totalMoves}`;
+        if (stepCounterEl) {
+            stepCounterEl.textContent = `${Math.max(0, currentMoveIndex + 1)} / ${solutionData.totalMoves}`;
+        }
 
         // Compute current cube state by applying moves up to currentMoveIndex
         let currentState = CubeState.clone(solutionData.originalState);
@@ -255,9 +273,27 @@ const App = (() => {
             currentState = CubeState.applyMove(currentState, solutionData.moves[i]);
         }
 
-        // Render mini net
+        // Render dual 3D + 2D display
         const cubeDisplay = document.getElementById('solve-cube-display');
-        CubeRenderer.renderMiniNet(cubeDisplay, currentState);
+        if (cubeDisplay) {
+            cubeDisplay.innerHTML = '';
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'solve-display-flex';
+
+            const scene3D = document.createElement('div');
+            scene3D.className = 'solve-3d-box';
+            const cubeEl = CubeRenderer.render3D(scene3D, currentState, 170);
+            CubeRenderer.enableInteractiveRotation(cubeEl, scene3D);
+
+            const net2D = document.createElement('div');
+            net2D.className = 'solve-2d-box';
+            CubeRenderer.renderMiniNet(net2D, currentState);
+
+            wrapper.appendChild(scene3D);
+            wrapper.appendChild(net2D);
+            cubeDisplay.appendChild(wrapper);
+        }
 
         // Scroll active badge into view
         const activeBadge = document.querySelector('#solve-moves .move-badge.highlight');
