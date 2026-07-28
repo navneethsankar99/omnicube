@@ -1,16 +1,28 @@
 {
   "name": "OmniCube — Speedcubing & Solver Suite",
   "short_name": "OmniCube",
-  "description": "The ultimate all-in-one Rubik's Cube suite. Speedcubing WCA timer, 119 CFOP algorithm trainer, and 3D optimal solver.",
-  "start_url": "./index.html",
+  "description": "The complete all-in-one speedcubing suite. WCA timer, 119 CFOP algorithms, and 3D Kociemba optimal solver.",
+  "start_url": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#0a0a0f",
-  "theme_color": "#0a0a0f",
+  "background_color": "#05050a",
+  "theme_color": "#05050a",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0f'/><text y='.9em' font-size='90'>🧊</text></svg>",
-      "sizes": "192x192 512x512",
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }

@@ -3,7 +3,7 @@
  * Enables 100% offline capabilities by caching app shell files and resources.
  */
 
-const CACHE_NAME = 'omnicube-v1';
+const CACHE_NAME = 'omnicube-v2';
 
 const ASSETS_TO_CACHE = [
     './',
@@ -18,6 +18,9 @@ const ASSETS_TO_CACHE = [
     './js/timer.js',
     './js/algorithms.js',
     './manifest.json',
+    './icon-192.png',
+    './icon-512.png',
+    './icon.svg'
 ];
 
 // Install Event — Cache App Shell
@@ -44,7 +47,7 @@ self.addEventListener('activate', (e) => {
     );
 });
 
-// Fetch Event — Cache-First Strategy
+// Fetch Event — Cache-First with Stale-While-Revalidate Fallback
 self.addEventListener('fetch', (e) => {
     // Only handle GET requests
     if (e.request.method !== 'GET') return;
@@ -52,19 +55,18 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(
         caches.match(e.request).then((cachedResponse) => {
             if (cachedResponse) {
-                // Return cached asset immediately, update in background
+                // Update in background
                 fetch(e.request).then((networkResponse) => {
                     if (networkResponse && networkResponse.status === 200) {
                         caches.open(CACHE_NAME).then((cache) => {
                             cache.put(e.request, networkResponse);
                         });
                     }
-                }).catch(() => { /* Offline, ignore network fetch failure */ });
+                }).catch(() => { /* Offline fallback */ });
 
                 return cachedResponse;
             }
 
-            // If not in cache, fetch from network and cache
             return fetch(e.request).then((networkResponse) => {
                 if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
                     return networkResponse;
