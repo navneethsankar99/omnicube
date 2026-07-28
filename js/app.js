@@ -98,6 +98,7 @@ const App = (() => {
         CubeRenderer.renderNet(netContainer, cubeState, (face, index, stickerEl) => {
             cubeState[face][index] = selectedColor;
             stickerEl.dataset.color = selectedColor;
+            updateInputPreview();
         });
 
         CubeRenderer.renderPalette(paletteContainer, selectedColor, (color) => {

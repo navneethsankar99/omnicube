@@ -1,4 +1,4 @@
-/* ===== DESIGN TOKENS — ZOMATO DISTRICT INSPIRED ===== */
+/* ===== DESIGN TOKENS — VIBRANT MIDNIGHT THEME ===== */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
@@ -11,7 +11,7 @@
     --bg-glass: rgba(18, 14, 28, 0.70);
     --bg-glass-strong: rgba(32, 24, 52, 0.85);
 
-    /* Zomato District Neon Accents */
+    /* Vibrant Neon Accents */
     --district-pink: #FF0055;
     --district-pink-glow: rgba(255, 0, 85, 0.45);
     --district-pink-subtle: rgba(255, 0, 85, 0.12);
@@ -82,7 +82,7 @@
     --sticker-gap: 4px;
 }
 
-/* ===== APP SPLASH SCREEN (ZOMATO DISTRICT STYLE) ===== */
+/* ===== APP SPLASH SCREEN ===== */
 .app-splash {
     position: fixed;
     top: 0;
@@ -272,6 +272,7 @@ h3 { font-size: 1.35rem; }
         0 0 25px rgba(255, 0, 85, 0.12),
         inset 0 1px 0 rgba(255, 255, 255, 0.12);
     transition: var(--transition-base);
+    position: relative;
 }
 
 .navbar-brand {
@@ -401,7 +402,7 @@ h3 { font-size: 1.35rem; }
     }
 }
 
-/* ===== ZOMATO DISTRICT GLASS CARDS & BENTO ===== */
+/* ===== GLASS CARDS ===== */
 .glass-card {
     background: var(--bg-card);
     backdrop-filter: blur(24px) saturate(180%);
@@ -432,7 +433,7 @@ h3 { font-size: 1.35rem; }
         inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-/* ===== DISTRICT BUTTONS ===== */
+/* ===== BUTTONS ===== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -525,7 +526,48 @@ h3 { font-size: 1.35rem; }
     border-radius: 50%;
 }
 
-/* ===== HOME HERO SECTION (ZOMATO DISTRICT VIBE) ===== */
+/* ===== 3D CUBE STYLES ===== */
+.cube-scene {
+    perspective: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cube-3d {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-22deg) rotateY(35deg);
+    transition: transform 0.1s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.cube-face-3d {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3px;
+    padding: 3px;
+    background: #08060f;
+    border: 2px solid #000;
+    border-radius: 12px;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.cube-sticker-3d {
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.2s ease;
+}
+
+/* ===== HOME HERO SECTION ===== */
 .home-hero {
     display: flex;
     flex-direction: column;
@@ -576,7 +618,6 @@ h3 { font-size: 1.35rem; }
     justify-content: center;
 }
 
-/* Glowing ambient backdrop behind 3D cube */
 .hero-cube-stage::before {
     content: '';
     position: absolute;
@@ -647,7 +688,7 @@ h3 { font-size: 1.35rem; }
     margin-bottom: 48px;
 }
 
-/* Hero Stats Strip (District Glass Pill) */
+/* Hero Stats Strip */
 .hero-stats-strip {
     display: inline-flex;
     align-items: center;
@@ -691,7 +732,7 @@ h3 { font-size: 1.35rem; }
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* ===== DISTRICT BENTO GRID ===== */
+/* ===== BENTO FEATURE GRID ===== */
 .home-features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -794,18 +835,20 @@ h3 { font-size: 1.35rem; }
     gap: 24px;
 }
 
-#input-palette {
+/* Color Palette Swatches */
+.color-palette {
     display: flex;
     gap: 12px;
     padding: 12px 24px;
-    background: rgba(18, 14, 28, 0.8);
+    background: rgba(18, 14, 28, 0.85);
     backdrop-filter: blur(20px);
     border-radius: var(--radius-full);
     border: 1px solid rgba(255, 0, 85, 0.25);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    justify-content: center;
 }
 
-.palette-swatch {
+.palette-color, .palette-swatch {
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -813,17 +856,25 @@ h3 { font-size: 1.35rem; }
     border: 2px solid transparent;
     transition: var(--transition-spring);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    outline: none;
 }
 
-.palette-swatch:hover {
+.palette-color:hover, .palette-swatch:hover {
     transform: scale(1.18);
 }
 
-.palette-swatch.active {
+.palette-color.selected, .palette-swatch.active {
     transform: scale(1.25);
     border-color: #FFFFFF;
-    box-shadow: 0 0 16px var(--district-pink-glow);
+    box-shadow: 0 0 18px var(--district-pink-glow), 0 0 8px #FFFFFF;
 }
+
+.palette-color.c-white { background-color: var(--cube-white); }
+.palette-color.c-red { background-color: var(--cube-red); }
+.palette-color.c-green { background-color: var(--cube-green); }
+.palette-color.c-yellow { background-color: var(--cube-yellow); }
+.palette-color.c-orange { background-color: var(--cube-orange); }
+.palette-color.c-blue { background-color: var(--cube-blue); }
 
 .input-controls {
     display: flex;
@@ -833,13 +884,27 @@ h3 { font-size: 1.35rem; }
     margin-top: 12px;
 }
 
-/* ===== SOLVER 2D CUBE NET ===== */
-.cube-net-grid {
+/* ===== 2D CUBE NET ===== */
+.cube-net {
     display: grid;
     grid-template-columns: repeat(4, auto);
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
     margin: 0 auto;
+}
+
+.face-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.face-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
 
 .face-grid {
@@ -860,21 +925,26 @@ h3 { font-size: 1.35rem; }
     cursor: pointer;
     transition: var(--transition-fast);
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+    background-color: var(--cube-gray);
 }
 
 .sticker:hover {
-    transform: scale(1.06);
+    transform: scale(1.08);
     z-index: 2;
 }
 
-/* Sticker Color Rules */
-.sticker.W { background-color: var(--cube-white); }
-.sticker.R { background-color: var(--cube-red); }
-.sticker.G { background-color: var(--cube-green); }
-.sticker.Y { background-color: var(--cube-yellow); }
-.sticker.O { background-color: var(--cube-orange); }
-.sticker.B { background-color: var(--cube-blue); }
-.sticker.X { background-color: var(--cube-gray); }
+/* Sticker Color Selectors */
+.sticker[data-color="U"], .sticker[data-color="W"], .sticker.U, .sticker.W { background-color: var(--cube-white); }
+.sticker[data-color="R"], .sticker.R { background-color: var(--cube-red); }
+.sticker[data-color="F"], .sticker[data-color="G"], .sticker.F, .sticker.G { background-color: var(--cube-green); }
+.sticker[data-color="D"], .sticker[data-color="Y"], .sticker.D, .sticker.Y { background-color: var(--cube-yellow); }
+.sticker[data-color="L"], .sticker[data-color="O"], .sticker.L, .sticker.O { background-color: var(--cube-orange); }
+.sticker[data-color="B"], .sticker.B { background-color: var(--cube-blue); }
+.sticker[data-color="X"], .sticker[data-color=""], .sticker.X { background-color: var(--cube-gray); }
+
+.sticker.center {
+    cursor: not-allowed;
+}
 
 /* ===== SOLVE VIEW ===== */
 .solve-steps-container {
@@ -1076,7 +1146,36 @@ h3 { font-size: 1.35rem; }
     word-break: break-word;
 }
 
-/* ===== TIMER VIEW (SPEEDCUBING TIMER) ===== */
+/* OLL / PLL Mini Diagram */
+.algo-diagram {
+    display: grid;
+    grid-template-columns: repeat(3, 18px);
+    grid-template-rows: repeat(3, 18px);
+    gap: 2px;
+    padding: 6px;
+    background: rgba(10, 8, 16, 0.9);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: fit-content;
+}
+
+.mini-sticker {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.mini-sticker.filled {
+    background: var(--cube-yellow);
+    box-shadow: 0 0 6px rgba(255, 214, 0, 0.6);
+}
+
+.mini-sticker.empty {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== TIMER VIEW ===== */
 .timer-scramble-card {
     margin-bottom: 24px;
     text-align: center;
@@ -1126,19 +1225,45 @@ h3 { font-size: 1.35rem; }
     transition: var(--transition-base);
 }
 
-.timer-area.holding .timer-display-container {
+/* Timer State Classes */
+.timer-area.state-holding .timer-display-container {
     border-color: #FFD600;
-    box-shadow: 0 0 40px rgba(255, 214, 0, 0.4);
+    box-shadow: 0 0 45px rgba(255, 214, 0, 0.45);
 }
 
-.timer-area.ready .timer-display-container {
+.timer-area.state-holding .timer-digits {
+    color: #FFD600;
+    text-shadow: 0 0 30px #FFD600;
+}
+
+.timer-area.state-ready .timer-display-container {
     border-color: #00E676;
-    box-shadow: 0 0 50px rgba(0, 230, 118, 0.5);
+    box-shadow: 0 0 55px rgba(0, 230, 118, 0.6);
 }
 
-.timer-area.running .timer-display-container {
+.timer-area.state-ready .timer-digits {
+    color: #00E676;
+    text-shadow: 0 0 30px #00E676;
+}
+
+.timer-area.state-running .timer-display-container {
     border-color: #FF0055;
-    box-shadow: 0 0 50px var(--district-pink-glow);
+    box-shadow: 0 0 55px var(--district-pink-glow);
+}
+
+.timer-area.state-running .timer-digits {
+    color: #FFFFFF;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.timer-area.state-inspection .timer-display-container {
+    border-color: #FF6D00;
+    box-shadow: 0 0 45px rgba(255, 109, 0, 0.45);
+}
+
+.timer-area.state-inspection .timer-digits {
+    color: #FF6D00;
+    text-shadow: 0 0 30px #FF6D00;
 }
 
 .timer-status-hint {
@@ -1157,9 +1282,6 @@ h3 { font-size: 1.35rem; }
     color: #FFFFFF;
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
 }
-
-.timer-area.ready .timer-digits { color: #00E676; text-shadow: 0 0 30px #00E676; }
-.timer-area.holding .timer-digits { color: #FFD600; text-shadow: 0 0 30px #FFD600; }
 
 /* Stats Bar */
 .timer-stats-bar {
@@ -1360,7 +1482,32 @@ h3 { font-size: 1.35rem; }
 
 /* ===== RESPONSIVE UTILITIES ===== */
 @media (max-width: 900px) {
-    .navbar-nav { display: none; }
+    .navbar-nav {
+        display: none;
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        right: 0;
+        background: rgba(12, 10, 22, 0.95);
+        backdrop-filter: blur(28px);
+        border: 1px solid rgba(255, 0, 85, 0.3);
+        border-radius: var(--radius-lg);
+        padding: 16px;
+        flex-direction: column;
+        gap: 8px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 0, 85, 0.15);
+    }
+    
+    .navbar-nav.open {
+        display: flex;
+    }
+
+    .nav-link {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 12px 20px;
+    }
+    
     .nav-toggle { display: block; }
     .mobile-bottom-nav { display: flex; }
     
