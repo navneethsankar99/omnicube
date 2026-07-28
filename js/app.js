@@ -813,6 +813,12 @@ const App = (() => {
         initHomeView();
         navigate('home');
 
+        // Dismiss splash screen smoothly after 1.2s
+        setTimeout(() => {
+            const splash = document.getElementById('app-splash');
+            if (splash) splash.classList.add('hidden');
+        }, 1200);
+
         // Service Worker Registration for PWA Offline Functionality
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
