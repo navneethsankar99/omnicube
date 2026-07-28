@@ -682,7 +682,10 @@ const App = (() => {
         document.getElementById('btn-last')?.addEventListener('click', lastMove);
         document.getElementById('btn-back-to-input')?.addEventListener('click', () => navigate('input'));
 
-        // Algo tabs
+        // Algo mode toggle & tabs
+        document.getElementById('mode-basic')?.addEventListener('click', () => setAlgoMode('basic'));
+        document.getElementById('mode-advanced')?.addEventListener('click', () => setAlgoMode('advanced'));
+
         document.querySelectorAll('.algo-tab').forEach(tab => {
             tab.addEventListener('click', () => renderAlgoTab(tab.dataset.tab));
         });
